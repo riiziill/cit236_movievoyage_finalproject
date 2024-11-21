@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header a {
+    text-decoration: none;
+    color: #000000;
+    margin: 0 10px;
+}
+
+.header input {
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.header .profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #cccccc;
+}
+
+.content {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #00796b;
+}
+
+.movies {
+    display: flex;
+    overflow-x: auto;
+}
+
+.movie {
+    margin-right: 20px;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.movie img {
+    width: 100%;
+    border-radius: 8px;
+}

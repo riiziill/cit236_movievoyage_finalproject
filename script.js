@@ -86,3 +86,71 @@ function displayMovies(genre, movies) {
     });
 }
 
+
+// profile page
+const profileIcon = document.getElementById('profile-icon');
+const profilePage = document.getElementById('profile-page');
+const backToHomeButton = document.getElementById('back-to-home');
+
+// show profile page
+profileIcon.addEventListener('click', () => {
+    profilePage.classList.remove('hidden');
+});
+
+// return to the main page
+backToHomeButton.addEventListener('click', () => {
+    profilePage.classList.add('hidden');
+});
+
+
+// function for watchlist
+function addToWatchlist(movieTitle) {
+    if (!watchlist.includes(movieTitle)) {
+        watchlist.push(movieTitle);
+        const watchlistElement = document.getElementById('watchlist');
+        const listItem = document.createElement('li');
+        listItem.textContent = movieTitle;
+        watchlistElement.appendChild(listItem);
+    }
+}
+
+// nav for movie page
+const movieDetails = document.getElementById('movie-details');
+const backToMoviesButton = document.getElementById('back-to-movies');
+const addWatchlistButton = document.getElementById('add-watchlist');
+const watchlist = [];
+
+// movie click
+document.body.addEventListener('click', (event) => {
+    const movieElement = event.target.closest('.movie');
+    if (movieElement) {
+        const movieTitle = movieElement.querySelector('h3').textContent;
+        const movieYear = movieElement.querySelector('p').textContent;
+        const moviePoster = movieElement.querySelector('img').src;
+
+        // Show movie details page
+        movieDetails.classList.remove('hidden');
+        document.getElementById('movie-poster').src = moviePoster;
+        document.getElementById('movie-title').textContent = movieTitle;
+        document.getElementById('movie-year').textContent = `Year: ${movieYear}`;
+    }
+});
+
+// return to main page
+backToMoviesButton.addEventListener('click', () => {
+    movieDetails.classList.add('hidden');
+});
+
+// add movie to watchlist
+addWatchlistButton.addEventListener('click', () => {
+    const movieTitle = document.getElementById('movie-title').textContent;
+
+    if (!watchlist.includes(movieTitle)) {
+        watchlist.push(movieTitle);
+        const watchlistElement = document.getElementById('watchlist');
+        const listItem = document.createElement('li');
+        listItem.textContent = movieTitle;
+        watchlistElement.appendChild(listItem);
+    }
+});
+

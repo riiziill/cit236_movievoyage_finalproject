@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Sign-Up</title>
+    <link rel="stylesheet" href="sign_up.css">
+    <title>Sign-In</title>
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo">
+            <h1> MV </h1>
+        </div>
+    </div>
+    
     <div class="form-container">
         <form>
             <h2>Sign-Up</h2>
+            <br>
             <label for="first-name">First Name:</label>
             <input type="text" id="first-name" name="first-name" required>
             <label for="last-name">Last Name:</label>
@@ -18,9 +25,11 @@
             <input type="email" id="email" name="email" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            <p class="gotosignin"> Already have an account? <a href="#">Sign In</a></p><br>
+            <br>
             <button type="submit">Sign Up</button>
         </form>
     </div>
-    <script src="js/sign-up.js"></script>
+    <script src="js/sign_up.js"></script>
 </body>
 </html>

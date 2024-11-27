@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="movies.css">
+</head>
+<body>
+    <div class="navbar">
+        <button id="returnButton" class="back-arrow"></button>
+        <h1 class="navbar-title" id="movie-navbar-title">Movie Details</h1>
+    </div>
+    <div class="container">
+        <img id="movie-poster" src="" alt="Movie Poster">
+        <div class="movie-info">
+            <h2 id="movie-title">Loading...</h2>
+            <p><strong>Director:</strong> <span id="movie-director"></span></p>
+            <p><strong>Released:</strong> <span id="movie-released"></span></p>
+            <p><strong>Genre:</strong> <span id="movie-genre"></span></p>
+            <p><strong>Actors:</strong> <span id="movie-actors"></span></p>
+            <p><strong>Review:</strong> <span id="movie-review"></span></p>
+            <br>
+            <button onclick="addToWatchlist('Movie Title')">Add to Watchlist</button>
+            <br>
+            <div class="rating-section">
+                <h3>Rate this Movie:</h3>
+                <div class="stars">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                    <span class="star" data-value="6">&#9733;</span>
+                    <span class="star" data-value="7">&#9733;</span>
+                    <span class="star" data-value="8">&#9733;</span>
+                    <span class="star" data-value="9">&#9733;</span>
+                    <span class="star" data-value="10">&#9733;</span>
+                </div>
+            </div>
+            <br>
+            <div class="review-section">
+                <h3>Leave a Review:</h3>
+                <textarea id="user-review" placeholder="Write your review here..."></textarea>
+                <button id="submit-review">Submit</button>
+                <br>
+                <br>
+                <h3>Reviews:</h3>
+                <div id="reviews">
+                    <p id="review1">Loading review 1...</p>
+                    <p id="review2">Loading review 2...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/movies.js"></script>
+</body>
+</html>

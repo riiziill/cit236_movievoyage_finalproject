@@ -1,0 +1,86 @@
+body {
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: maroon;
+    width: 100%;
+    padding: 0px 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+h1{
+    color: white;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px; /* Adjust margin to prevent overlap with navbar */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+form h2 {
+    margin-bottom: 20px;
+    font-family: 'Courier'; /* Space between Sign-In label and Email label */
+}
+
+form label,
+form input {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left; /* Center the labels and inputs */
+    font-family: 'Courier';
+}
+
+form input {
+    width: 200px; /* Adjust width as needed */
+    padding: 8px;
+    text-align: left;
+}
+
+button {
+    background-color: white; /* Green background */
+    border: none; /* Remove borders */
+    color: black; /* White text */
+    padding: 10px 24px; /* Adjust padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Get the element to line up properly */
+    font-size: 14px; /* Reduce font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+button:hover {
+    background-color: maroon; /* Darker green on hover */
+    color: white;
+}
+
+.gotosignup {
+    font-size: 10px;
+    font-family: 'Courier';
+    color: white;
+}
+
+a{
+    color: white;
+}

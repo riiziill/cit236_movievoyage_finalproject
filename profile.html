@@ -3,22 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Profile</title>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    <header class="header">
-        <h1>Profile</h1>
-        <nav class="nav">
-            <a href="home.html">Home</a>
-        </nav>
-    </header>
-    <section class="profile-container">
-        <div class="profile-info"></div>
-        <div class="watchlist">
-            <h2>Your Watchlist</h2>
+    <div class="header">
+        <div class="nav">
+            <h1>MV</h1>
+            <a href="index.html">Home</a>
+            <a href="watchlist.html">Watchlist</a>
+            <a href="#">History</a>
+            <div class="search-bar">
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                </form>
+            </div>
+            <img src="profile-image.jpg" alt="Profile Image" class="nav-img"> 
         </div>
-    </section>
+    </div>
+    <div class="container">
+        <div class="profile-header">
+            <label for="profile-img-input" class="profile-img-label">
+                <img src="profile-image.jpg" alt="Profile Image" class="profile-img" id="profile-img">
+            </label>
+            <input type="file" id="profile-img-input" style="display: none;" accept="image/*">
+            <h2 id="user-name">User Name</h2>
+            <textarea id="bio" class="bio" disabled>This is a short bio about the user. It can include information about their interests, favorite movies, and more.</textarea>
+            <button id="edit-bio-btn">Edit Bio</button>
+            <button id="save-bio-btn" style="display: none;">Save Bio</button>
+        </div>
+        <br>
+        <div class="watchlist">
+            <h3>Watchlist</h3>
+            <ul id="watchlist">
+                <li>Loading watchlist...</li>
+            </ul>
+        </div>
+    </div>
     <script src="js/profile.js"></script>
+    <script>
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                alert('Search submitted for: ' + document.getElementById('searchInput').value);
+            }
+        });
+    </script>
 </body>
 </html>

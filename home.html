@@ -1,22 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Home</title>
-</head>
-<body>
-    <header class="header">
-        <h1>Movie List</h1>
-        <nav class="nav">
-            <a href="profile.html">Profile</a>
-        </nav>
-    </header>
-    <section class="section">
-        <h2>Popular Movies</h2>
-        <div class="movies"></div>
-    </section>
-    <script src="js/home.js"></script>
-</body>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Movie Voyage</title> 
+    <link rel="stylesheet" href="home.css"> 
+</head> 
+<body> 
+    <div class="header"> 
+        <div class="nav"> 
+            <h1>MV</h1> 
+            <a href="home.html">Home</a> 
+            <a href="watchlist.html">Watchlist</a> 
+            <a href="#">History</a> 
+            <div class="search-bar"> 
+                <form id="searchForm"> 
+                    <input type="text" id="searchInput" placeholder="Search..."> 
+                </form> 
+            </div> 
+            <a href="profile.html"><img src="your-image.jpg" alt="" class="nav-img"></a>
+        </div> 
+    </div> 
+    <div class="section" id="horror-section"> 
+        <h2>Horror</h2> 
+        <div class="movie-container"> 
+            <div class="movies" id="horror-movies"></div> 
+        </div> 
+        <div class="slider-container"></div> 
+    </div>
+    <div class="section" id="comedy-section"> 
+        <h2>Comedy</h2> 
+        <div class="movie-container"> 
+            <div class="movies" id="comedy-movies"></div> 
+        </div> 
+        <div class="slider-container"></div> 
+    </div> 
+    <div class="section" id="action-section"> 
+        <h2>Action</h2> 
+        <div class="movie-container"> 
+            <div class="movies" id="action-movies"></div> 
+        </div> 
+        <div class="slider-container"></div> 
+    </div> 
+    <div class="section" id="romance-section"> 
+        <h2>Romance</h2> 
+        <div class="movie-container"> 
+            <div class="movies" id="romance-movies"></div> 
+        </div> 
+        <div class="slider-container"></div> 
+    </div> 
+    <script src="js/home.js"></script> 
+    <script> 
+        document.getElementById('searchInput').addEventListener('keypress', function(event) { 
+            if (event.key === 'Enter') { 
+                event.preventDefault(); 
+                alert('Search submitted for: ' + document.getElementById('searchInput').value); 
+            } 
+        }); 
+    </script> 
+</body> 
 </html>

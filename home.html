@@ -4,6 +4,7 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Movie Voyage</title> 
+    <link rel="icon" type="image" href="assets/icon.png">
     <link rel="stylesheet" href="home.css"> 
 </head> 
 <body> 
@@ -14,11 +15,20 @@
             <a href="watchlist.html">Watchlist</a> 
             <a href="#">History</a> 
             <div class="search-bar"> 
-                <form id="searchForm"> 
-                    <input type="text" id="searchInput" placeholder="Search..."> 
-                </form> 
+                <form id="filter-form">
+                    <input type="text" id="filter-title" placeholder="Search by Title">
+                    <select id="filter-genre">
+                        <option value="">All Genres</option>
+                        <option value="horror">Horror</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="action">Action</option>
+                        <option value="romance">Romance</option>
+                    </select>
+                    <input type="number" id="filter-year" placeholder="Year" min="1900">
+                </form>
+                <div id="no-results" style="display: none;">No movies match the selected filters.</div>
             </div> 
-            <a href="profile.html"><img src="your-image.jpg" alt="" class="nav-img"></a>
+            <a href="profile.html"><img src="assets/profile-image.png" alt="" class="nav-img"></a>
         </div> 
     </div> 
     <div class="section" id="horror-section"> 

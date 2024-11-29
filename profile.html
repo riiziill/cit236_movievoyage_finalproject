@@ -13,12 +13,6 @@
             <h1>MV</h1>
             <a href="home.html">Home</a>
             <a href="watchlist.html">Watchlist</a>
-            <a href="#">History</a>
-            <div class="search-bar">
-                <form id="searchForm">
-                    <input type="text" id="searchInput" placeholder="Search...">
-                </form>
-            </div>
             <img src="assets/profile-image.png" alt="Profile Image" class="nav-img"> 
         </div>
     </div>
@@ -33,22 +27,7 @@
             <button id="edit-bio-btn">Edit Bio</button>
             <button id="save-bio-btn" style="display: none;">Save Bio</button>
         </div>
-        <br>
-        <div class="watchlist">
-            <h3>Watchlist</h3>
-            <ul id="watchlist">
-                <li>Loading watchlist...</li>
-            </ul>
-        </div>
     </div>
     <script src="js/profile.js"></script>
-    <script>
-        document.getElementById('searchInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                alert('Search submitted for: ' + document.getElementById('searchInput').value);
-            }
-        });
-    </script>
 </body>
 </html>

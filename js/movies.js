@@ -5,7 +5,6 @@ async function fetchMovieDetails(id) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data); 
         if (data.Response === 'True') {
             displayMovieDetails(data);
             fetchMovieReviews(id);
@@ -29,11 +28,8 @@ function displayMovieDetails(movie) {
     document.getElementById('movie-actors').textContent = movie.Actors;
     document.getElementById('movie-review').textContent = movie.imdbRating;
 
-    // Add to Watchlist button
-    const addToWatchlistBtn = document.createElement('button');
-    addToWatchlistBtn.textContent = 'Add to Watchlist';
-    addToWatchlistBtn.addEventListener('click', () => addToWatchlist(movie.Title));
-    document.getElementById('movie-details').appendChild(addToWatchlistBtn);
+    const addToWatchlistBtn = document.getElementById('addToWatchlistBtn');
+    addToWatchlistBtn.addEventListener('click', () => addToWatchlist(movie));
 }
 
 function displayMovieReviews(reviews) {
@@ -55,15 +51,12 @@ async function fetchMovieReviews(id) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         if (data && data.reviews) {
             displayMovieReviews(data.reviews);
         } else {
-            console.error('Reviews not found:', data.Error);
             displayMovieReviews([]);
         }
     } catch (error) {
-        console.error('Error fetching movie reviews:', error);
         displayMovieReviews([]);
     }
 }
@@ -77,11 +70,8 @@ const movieId = urlParams.get('id');
 
 if (movieId) {
     fetchMovieDetails(movieId);
-} else {
-    document.getElementById('movie-title').textContent = 'No movie ID provided';
 }
 
-// Handle review submission
 document.getElementById('submit-review').addEventListener('click', async function() {
     const userReview = document.getElementById('user-review').value;
     const rating = document.querySelector('.stars .star.active')?.getAttribute('data-value');
@@ -91,8 +81,6 @@ document.getElementById('submit-review').addEventListener('click', async functio
             review: userReview,
             rating: rating
         };
-        
-        console.log('Submitting review data:', reviewData); // Add logging for debugging
         
         try {
             const response = await fetch('https://api.example.com/submit-review', {
@@ -107,16 +95,12 @@ document.getElementById('submit-review').addEventListener('click', async functio
                 const newReview = document.createElement('p');
                 newReview.textContent = `${userReview} - Rating: ${rating} stars`;
                 document.getElementById('reviews').appendChild(newReview);
-                document.getElementById('user-review').value = ''; // Clear the textarea
-                document.querySelector('.stars .star.active')?.classList.remove('active');
-                // Display pop-up message
+                document.getElementById('user-review').value = ''; 
                 alert('Thank you for rating the movie!');
             } else {
-                console.error('Failed to submit review:', response.statusText); // Add logging for debugging
                 alert('Failed to submit review');
             }
         } catch (error) {
-            console.error('Error submitting review:', error); // Add logging for debugging
             alert('Error submitting review');
         }
     } else {
@@ -124,7 +108,7 @@ document.getElementById('submit-review').addEventListener('click', async functio
     }
 });
 
-// Handle star rating selection
+
 document.querySelectorAll('.stars .star').forEach(star => {
     star.addEventListener('click', function() {
         document.querySelectorAll('.stars .star').forEach(s => s.classList.remove('active'));
@@ -132,10 +116,22 @@ document.querySelectorAll('.stars .star').forEach(star => {
     });
 });
 
-// Function to add a movie to the watchlist
-function addToWatchlist(movieTitle) {
+// add to watchlistt
+function addToWatchlist(movie) {
     let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-    watchlist.push({ title: movieTitle });
-    localStorage.setItem('watchlist', JSON.stringify(watchlist));
-    alert(`${movieTitle} has been added to your watchlist!`);
+    const isAlreadyInWatchlist = watchlist.some(item => item.imdbID === movie.imdbID);
+    
+    if (!isAlreadyInWatchlist) {
+        watchlist.push({
+            Title: movie.Title,
+            Genre: movie.Genre,
+            Released: movie.Released,
+            imdbID: movie.imdbID,
+            Poster: movie.Poster
+        });
+        localStorage.setItem('watchlist', JSON.stringify(watchlist));
+        alert(`${movie.Title} has been added to your watchlist!`);
+    } else {
+        alert(`${movie.Title} is already in your watchlist.`);
+    }
 }

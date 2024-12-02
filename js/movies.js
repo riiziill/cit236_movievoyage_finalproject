@@ -41,6 +41,7 @@ function displayMovieDetails(movie) {
     movie.genres.map((g) => g.name).join(", ") || "N/A";
   document.getElementById("movie-review").textContent =
     movie.vote_average || "N/A";
+  document.getElementById("movie-plot").textContent = movie.overview || "N/A";
 
   const addToWatchlistBtn = document.getElementById("addToWatchlistBtn");
   addToWatchlistBtn.addEventListener("click", () => addToWatchlist(movie));

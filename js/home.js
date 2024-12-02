@@ -41,7 +41,7 @@ async function filterMovies() {
           : "https://via.placeholder.com/200x300?text=No+Image";
 
         movieDiv.innerHTML = `
-                    <a href="search.html?query=${encodeURIComponent(
+                    <a href="search.php?query=${encodeURIComponent(
                       movie.title
                     )}">
                         <img src="${moviePoster}" alt="${movieTitle}">
@@ -114,7 +114,7 @@ function displayMovies(genre, movies) {
       : "https://via.placeholder.com/200x300?text=No+Image";
 
     movieDiv.innerHTML = `
-            <a href="movies.html?id=${movie.id}">
+            <a href="movies.php?id=${movie.id}">
                 <img src="${moviePoster}" alt="${movieTitle}">
                 <h3>${movieTitle} (${
       movie.release_date ? movie.release_date.split("-")[0] : "N/A"
@@ -162,7 +162,7 @@ document
     if (event.key === "Enter") {
       event.preventDefault();
       const searchQuery = document.getElementById("filter-title").value;
-      window.location.href = `search.html?query=${encodeURIComponent(
+      window.location.href = `search.php?query=${encodeURIComponent(
         searchQuery
       )}`;
     }
@@ -173,7 +173,7 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
     const searchQuery = document.getElementById("filter-title").value;
-    window.location.href = `search.html?query=${encodeURIComponent(
+    window.location.href = `search.php?query=${encodeURIComponent(
       searchQuery
     )}`;
   });

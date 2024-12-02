@@ -1,11 +1,11 @@
-document.getElementById("signup-form").addEventListener("submit", async (e) => {
-  e.preventDefault(); // Prevent the default form submission behavior
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
 
   const formData = new FormData(e.target);
   const messageDiv = document.getElementById("response-message");
 
   try {
-    const response = await fetch("includes/process_signup.php", {
+    const response = await fetch("includes/process_login.php", {
       method: "POST",
       body: formData,
     });
@@ -17,11 +17,11 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (result.success) {
-      messageDiv.textContent = "Sign-up successful! Redirecting...";
+      messageDiv.textContent = "Login successful! Redirecting...";
       messageDiv.style.color = "green";
       setTimeout(() => {
-        window.location.href = "log_in.php";
-      }, 4000);
+        window.location.href = "home.php"; // Redirect to the dashboard or home page
+      }, 2000);
     } else {
       messageDiv.textContent = result.message;
       messageDiv.style.color = "red";

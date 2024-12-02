@@ -5,27 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Watchlist</title>
     <link rel="icon" type="image" href="assets/icon.png" />
+    <link rel="stylesheet" href="navbar.css" />
     <link rel="stylesheet" href="watchlist.css" />
   </head>
   <body>
-    <div class="header">
-      <div class="nav">
-        <h1>MV</h1>
-        <a href="home.html">Home</a>
-        <a href="watchlist.html">Watchlist</a>
-        <img
-          src="assets/profile-image.png"
-          alt="Profile Image"
-          class="nav-img"
-        />
-      </div>
-    </div>
+    <div id="navbar"></div>
     <div class="container">
       <h2>Your Watchlist</h2>
       <ul id="watchlist">
         <li>Loading watchlist...</li>
       </ul>
     </div>
+    <script src="js/navbar.js" defer></script>
     <script type="module" src="js/watchlist.js"></script>
   </body>
 </html>

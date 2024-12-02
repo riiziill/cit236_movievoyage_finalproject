@@ -1,3 +1,6 @@
+<?php
+session_start(); // Start the session
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,26 +15,17 @@
     <div id="navbar"></div>
     <div class="">
       <button id="returnButton" class="back-arrow"></button>
-      <!-- Back arrow -->
       <h1 class="navbar-title" id="movie-navbar-title">Movie Details</h1>
     </div>
     <div class="container">
       <img id="movie-poster" src="" alt="Movie Poster" class="movie-poster" />
       <div class="movie-info">
-        <!-- Trailer Section -->
         <div class="trailer-section">
           <button id="play-trailer-btn">Play Trailer</button>
-          <!-- Modal for Trailer -->
           <div id="trailer-modal" class="modal">
             <div class="modal-content">
               <span id="close-trailer" class="close-btn">&times;</span>
-              <iframe
-                id="trailer-video"
-                width="560"
-                height="315"
-                frameborder="0"
-                allowfullscreen
-              ></iframe>
+              <iframe id="trailer-video" width="560" height="315" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -44,64 +38,35 @@
         <p><strong>Overview:</strong> <span id="movie-plot">N/A</span></p>
 
         <br />
-        <button id="addToWatchlistBtn">Add to Watchlist</button>
+
+        <!-- Add to Watchlist -->
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <button id="addToWatchlistBtn">Add to Watchlist</button>
+        <?php else: ?>
+          <p id="login-prompt">You need to log in to add movies to your watchlist. <a href="log_in.php">Log in here</a>.</p>
+        <?php endif; ?>
 
         <br /><br />
 
-        <!-- Rating Section -->
-        <div class="rating-section">
-          <h3>Rate this Movie:</h3>
-          <div class="stars">
-            <span class="star" data-value="1">&#9733;</span>
-            <span class="star" data-value="2">&#9733;</span>
-            <span class="star" data-value="3">&#9733;</span>
-            <span class="star" data-value="4">&#9733;</span>
-            <span class="star" data-value="5">&#9733;</span>
-            <span class="star" data-value="6">&#9733;</span>
-            <span class="star" data-value="7">&#9733;</span>
-            <span class="star" data-value="8">&#9733;</span>
-            <span class="star" data-value="9">&#9733;</span>
-            <span class="star" data-value="10">&#9733;</span>
-          </div>
-        </div>
-
-        <!-- Cast Section -->
         <div class="cast-section">
           <h3>Cast</h3>
           <div id="cast-list" class="movie-list"></div>
-          <!-- New Cast section -->
         </div>
 
-        <!-- Recommended Movies Section -->
         <div class="recommended-movies">
           <h3>Recommended Movies</h3>
           <div id="recommended-list" class="movie-list"></div>
         </div>
 
         <br />
-
-        <!-- Review Section -->
-        <div class="review-section">
-          <h3>Leave a Review:</h3>
-          <textarea
-            id="user-review"
-            placeholder="Write your review here..."
-          ></textarea>
-          <button id="submit-review">Submit</button>
-
-          <br /><br />
-
-          <h3>Reviews:</h3>
-          <div id="reviews">
-            <p id="review1">Loading review 1...</p>
-            <p id="review2">Loading review 2...</p>
-            <!-- More reviews will be added here dynamically -->
-          </div>
-        </div>
       </div>
     </div>
 
-    <!-- Link to your JavaScript -->
+    <!-- Pass PHP session data to JavaScript -->
+    <script>
+      const userId = <?php echo isset($_SESSION['user_id']) ? json_encode($_SESSION['user_id']) : 'null'; ?>;
+    </script>
+
     <script src="js/navbar.js"></script>
     <script type="module" src="js/movies.js"></script>
   </body>

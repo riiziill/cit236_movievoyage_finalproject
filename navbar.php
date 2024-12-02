@@ -15,7 +15,7 @@
       </form>
       <div id="no-results" style="display: none">No movies found.</div>
     </div>
-    <a href="profile.html">
+    <a href="profile.php">
       <img src="assets/profile-image.png" alt="" class="nav-img" />
     </a>
   </div>

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     const query = searchInput.value.trim();
     if (query) {
-      window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+      window.location.href = `search.php?query=${encodeURIComponent(query)}`;
     }
   });
 
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         : "N/A";
 
       movieElement.innerHTML = `
-        <a href="movies.html?id=${movie.id}">
+        <a href="movies.php?id=${movie.id}">
           <img src="${moviePoster}" alt="${movieTitle}">
           <h3>${movieTitle}</h3>
           <p>Release Year: ${releaseYear}</p>

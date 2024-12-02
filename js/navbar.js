@@ -2,10 +2,10 @@ document.getElementById("navbar").innerHTML = `
   <div class="header">
   <div class="nav">
     <h1>MV</h1>
-    <a href="home.html">Home</a>
-    <a href="watchlist.html">Watchlist</a>
+    <a href="home.php">Home</a>
+    <a href="watchlist.php">Watchlist</a>
     <div class="search-bar">
-      <form id="filter-form" action="search.html" method="get">
+      <form id="filter-form" action="search.php" method="get">
         <input
           type="text"
           id="filter-title"
@@ -16,7 +16,7 @@ document.getElementById("navbar").innerHTML = `
       </form>
       <div id="no-results" style="display: none">No movies found.</div>
     </div>
-    <a href="profile.html">
+    <a href="profile.php">
       <img src="assets/profile-image.png" alt="" class="nav-img" />
     </a>
   </div>

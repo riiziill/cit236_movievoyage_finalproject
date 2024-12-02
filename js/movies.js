@@ -34,7 +34,7 @@ function displayMovieDetails(movie) {
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : "https://via.placeholder.com/200x300?text=No+Image";
   document.getElementById("movie-director").textContent =
-    "Director information not available"; // Will be updated in fetchDirector
+    "Director information not available";
   document.getElementById("movie-released").textContent =
     movie.release_date || "N/A";
   document.getElementById("movie-genre").textContent =
@@ -44,7 +44,9 @@ function displayMovieDetails(movie) {
   document.getElementById("movie-plot").textContent = movie.overview || "N/A";
 
   const addToWatchlistBtn = document.getElementById("addToWatchlistBtn");
-  addToWatchlistBtn.addEventListener("click", () => addToWatchlist(movie));
+  if (addToWatchlistBtn) {
+    addToWatchlistBtn.addEventListener("click", () => addToWatchlist(movie));
+  }
 }
 
 // Fetch trailer for the movie
@@ -126,7 +128,7 @@ function displayRecommendedMovies(movies) {
 
     // Add click event listener to each movie to redirect to its movie page
     movieItem.addEventListener("click", () => {
-      window.location.href = `movies.html?id=${movie.id}`; // Redirect to the movie details page
+      window.location.href = `movies.php?id=${movie.id}`; // Redirect to the movie details page
     });
 
     recommendedList.appendChild(movieItem);
@@ -201,6 +203,36 @@ async function fetchDirector(id) {
     console.error("Error fetching director:", error);
     document.getElementById("movie-director").textContent =
       "Error loading director information";
+  }
+}
+
+// Add to Watchlist
+async function addToWatchlist(movie) {
+  if (userId === null) {
+    alert("You need to log in to add movies to your watchlist.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("user_id", userId);
+  formData.append("tmdb_id", movie.id);
+
+  try {
+    const response = await fetch("add_to_watchlist.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Movie added to watchlist!");
+    } else {
+      alert("Failed to add movie to watchlist.");
+    }
+  } catch (error) {
+    console.error("Error adding to watchlist:", error);
+    alert("Error adding to watchlist.");
   }
 }
 

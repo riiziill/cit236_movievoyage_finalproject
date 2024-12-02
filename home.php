@@ -7,8 +7,10 @@
     <link rel="icon" type="image" href="assets/icon.png" />
     <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="navbar.css" />
+    <?php ?>
   </head>
   <body>
+    <?php session_start() ?>
     <div id="navbar"></div>
 
     <div class="section" id="horror-section">

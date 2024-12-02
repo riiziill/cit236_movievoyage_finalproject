@@ -213,26 +213,27 @@ async function addToWatchlist(movie) {
     return;
   }
 
+  // Prepare the form data
   const formData = new FormData();
   formData.append("user_id", userId);
   formData.append("tmdb_id", movie.id);
 
   try {
+    // Send the data to the PHP script asynchronously
     const response = await fetch("add_to_watchlist.php", {
       method: "POST",
       body: formData,
     });
 
-    const result = await response.json();
-
-    if (result.success) {
-      alert("Movie added to watchlist!");
+    // Check if the request was successful
+    if (response.ok) {
+      alert("Movie added to your watchlist!");
     } else {
-      alert("Failed to add movie to watchlist.");
+      alert("There was an error adding the movie to your watchlist.");
     }
   } catch (error) {
-    console.error("Error adding to watchlist:", error);
-    alert("Error adding to watchlist.");
+    console.error("Error:", error);
+    alert("There was an error adding the movie to your watchlist.");
   }
 }
 

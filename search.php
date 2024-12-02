@@ -14,11 +14,9 @@
 
     <main>
       <section id="search-results" class="search-results">
-        <!-- Movie results will be dynamically inserted here -->
       </section>
 
       <div id="pagination" class="pagination">
-        <!-- Pagination buttons will be dynamically generated -->
       </div>
     </main>
 

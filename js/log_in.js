@@ -1,5 +1,5 @@
 document.getElementById("login-form").addEventListener("submit", async (e) => {
-  e.preventDefault(); // Prevent default form submission behavior
+  e.preventDefault();
 
   const formData = new FormData(e.target);
   const messageDiv = document.getElementById("response-message");
@@ -20,7 +20,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       messageDiv.textContent = "Login successful! Redirecting...";
       messageDiv.style.color = "green";
       setTimeout(() => {
-        window.location.href = "home.php"; // Redirect to the dashboard or home page
+        window.location.href = "home.php";
       }, 2000);
     } else {
       messageDiv.textContent = result.message;

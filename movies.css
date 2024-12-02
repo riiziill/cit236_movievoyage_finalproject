@@ -10,11 +10,10 @@ body {
 .container {
   display: flex;
   align-items: flex-start;
-  margin-top: 40px; /* Adjust for navbar height */
+  margin-top: 40px;
   padding: 20px;
 }
 
-/* Movie Poster */
 #movie-poster {
   max-width: 300px;
   height: 500px;
@@ -22,11 +21,10 @@ body {
   margin-top: 50px;
   margin-left: 380px;
   padding: 0px;
-  outline: 5px solid white; /* Maroon outline */
-  box-shadow: 0 0 30px red; /* Blurred shadow */
+  outline: 5px solid white;
+  box-shadow: 0 0 30px red;
 }
 
-/* Movie Info Section */
 .movie-info {
   max-width: 600px;
   padding: 30px;
@@ -104,37 +102,34 @@ body {
   border-radius: 5px;
 }
 
-/* Modal for the Trailer */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000; /* Ensure it's above other content */
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+  background-color: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Prevent overflow of content */
+  overflow: hidden;
 }
 
-/* Modal Content */
 .modal-content {
-  background-color: transparent; /* No border */
+  background-color: transparent;
   padding: 0;
   position: relative;
-  width: 80%; /* More responsive width */
-  max-width: 1200px; /* Prevents large video */
-  height: auto; /* Automatically adjusts based on content */
-  max-height: 80vh; /* Prevents modal from growing too tall */
+  width: 80%;
+  max-width: 1200px;
+  height: auto;
+  max-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Prevent overflow */
+  overflow: hidden;
 }
 
-/* Close Button */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -142,26 +137,24 @@ body {
   font-size: 30px;
   color: white;
   cursor: pointer;
-  z-index: 1001; /* Ensure it's above modal */
+  z-index: 1001;
 }
 
 .close-btn:hover {
-  color: #ff4d4d; /* Color change on hover */
+  color: #ff4d4d;
 }
 
-/* Video Player */
 #trailer-video {
   width: 100%;
-  height: 56.25vw; /* 16:9 aspect ratio */
-  max-height: 80vh; /* Prevents excessive vertical space */
-  object-fit: contain; /* Fits the video within modal without distortion */
-  background-color: black; /* Optional: Adds black background */
+  height: 56.25vw;
+  max-height: 80vh;
+  object-fit: contain;
+  background-color: black;
 }
 
-/* Recommended Movies Row */
 .recommended-movies {
   margin-top: 40px;
-  padding: 0 20px; /* Padding for the section */
+  padding: 0 20px;
 }
 
 .movie-list {
@@ -175,22 +168,22 @@ body {
 }
 
 .movie-item {
-  width: 200px; /* Set the same width for consistency */
+  width: 200px;
   text-align: center;
-  flex-shrink: 0; /* Prevents shrinking */
-  cursor: pointer; /* Cursor change on hover */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-item:hover {
-  transform: scale(1.05); /* Slightly enlarge the movie item */
-  box-shadow: 0 0 20px 2px rgba(255, 0, 0, 0.7); /* Red highlight effect */
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 2px rgba(255, 0, 0, 0.7);
 }
 
 .movie-item img {
   width: 100%;
-  height: 300px; /* Same height for consistency */
-  object-fit: cover; /* Ensures uniform scaling */
+  height: 300px;
+  object-fit: cover;
   border-radius: 5px;
 }
 
@@ -200,10 +193,9 @@ body {
   color: white;
 }
 
-/* Cast Section */
 .cast-section {
   margin-top: 40px;
-  padding: 0 20px; /* Padding for the section */
+  padding: 0 20px;
 }
 
 .cast-section h3 {
@@ -221,14 +213,14 @@ body {
 }
 
 .cast-item {
-  width: 200px; /* Set the same width for consistency */
+  width: 200px;
   text-align: center;
   flex-shrink: 0;
 }
 
 .cast-item img {
   width: 100%;
-  height: 300px; /* Same height for consistency */
+  height: 300px;
   object-fit: cover;
   border-radius: 5px;
 }

@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +39,6 @@ session_start(); // Start the session
 
         <br />
 
-        <!-- Add to Watchlist -->
         <?php if (isset($_SESSION['user_id'])): ?>
           <button id="addToWatchlistBtn">Add to Watchlist</button>
         <?php else: ?>
@@ -62,7 +61,6 @@ session_start(); // Start the session
       </div>
     </div>
 
-    <!-- Pass PHP session data to JavaScript -->
     <script>
       const userId = <?php echo isset($_SESSION['user_id']) ? json_encode($_SESSION['user_id']) : 'null'; ?>;
     </script>

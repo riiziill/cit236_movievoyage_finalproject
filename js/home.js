@@ -10,8 +10,8 @@ async function filterMovies() {
   const noResults = document.getElementById("no-results");
   const movieContainer = document.getElementById("filtered-movies");
 
-  movieContainer.innerHTML = ""; // Clear previous results
-  noResults.style.display = "none"; // Hide no results initially
+  movieContainer.innerHTML = "";
+  noResults.style.display = "none";
 
   if (!titleFilter) {
     noResults.textContent = "Please enter a title to search.";
@@ -84,13 +84,13 @@ async function fetchMovies(genreId, genreName, page = 1) {
     }
   } catch (error) {
     console.error(`Error fetching movies for ${genreName}:`, error.message);
-    displayError(genreName); // Show error message if fetching fails
+    displayError(genreName);
   }
 }
 
 function displayMovies(genre, movies) {
   const movieSection = document.getElementById(`${genre}-movies`);
-  movieSection.innerHTML = ""; // Clear existing movies
+  movieSection.innerHTML = "";
 
   if (movies.length === 0) {
     movieSection.innerHTML = "<p>No movies found for this genre.</p>";
@@ -107,7 +107,6 @@ function displayMovies(genre, movies) {
     );
     movieDiv.setAttribute("data-genre", genre);
 
-    // Check if movie title or poster is missing
     const movieTitle = movie.title || "Unknown Title";
     const moviePoster = movie.poster_path
       ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -155,7 +154,6 @@ document.getElementById("filter-form").addEventListener("input", function () {
   filterMovies();
 });
 
-// Redirect to search page with query when search input is entered
 document
   .getElementById("filter-title")
   .addEventListener("keypress", function (event) {

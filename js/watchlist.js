@@ -1,35 +1,46 @@
-function loadWatchlist() {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-    const watchlistContainer = document.getElementById('watchlist');
-    watchlistContainer.innerHTML = '';
+fetchWatchlist();
 
-    if (watchlist.length === 0) {
-        watchlistContainer.innerHTML = '<li>Your watchlist is empty.</li>';
-    } else {
-        watchlist.forEach(movie => {
-            const movieItem = document.createElement('li');
-            movieItem.classList.add('movie-item');
-            const movieTitle = document.createElement('span');
-            movieTitle.textContent = movie.Title;
-            movieItem.appendChild(movieTitle);
-
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove from Watchlist';
-            removeButton.addEventListener('click', () => removeFromWatchlist(movie.imdbID));
-            movieItem.appendChild(removeButton);
-            watchlistContainer.appendChild(movieItem);
-        });
-    }
+function fetchWatchlist() {
+  fetch("fetch_watchlist.php", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        displayMovies(data.movies);
+      } else {
+        document.getElementById("watchlist-container").innerHTML = data.message;
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching watchlist:", error);
+      document.getElementById("watchlist-container").innerHTML =
+        "Error loading movies.";
+    });
 }
 
-// remove wathclist
-function removeFromWatchlist(imdbID) {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-    watchlist = watchlist.filter(movie => movie.imdbID !== imdbID);
-    localStorage.setItem('watchlist', JSON.stringify(watchlist));
-    loadWatchlist();
-}
+function displayMovies(movies) {
+  const container = document.getElementById("watchlist-container");
+  container.innerHTML = "";
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadWatchlist();
-});
+  movies.forEach((movie) => {
+    const movieDiv = document.createElement("div");
+    movieDiv.classList.add("movie");
+
+    const posterUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+    const releaseYear = new Date(movie.release_date).getFullYear();
+
+    const movieLink = document.createElement("a");
+
+    movieLink.innerHTML = `
+    <a href="movies.php?id=${movie.id}">
+      <img src="${posterUrl}" alt="${movie.title}">
+      <div class="movie-title">${movie.title}</div>
+      <div class="movie-overview">(${releaseYear})</div>
+    `;
+
+    movieDiv.appendChild(movieLink);
+
+    container.appendChild(movieDiv);
+  });
+}

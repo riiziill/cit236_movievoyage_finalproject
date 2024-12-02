@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchForm = document.getElementById("filter-form");
   const searchInput = document.getElementById("filter-title");
 
-  // Add event listener for form submission
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const query = searchInput.value.trim();
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fetch search results based on query
   async function fetchMovies(query, page = 1) {
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
       query
@@ -42,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render movies in the search results section
   function renderMovies() {
     searchResults.innerHTML = "";
     const start = (currentPage - 1) * resultsPerPage;
@@ -73,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Render pagination buttons
   function renderPagination() {
     pagination.innerHTML = "";
     const totalPages = Math.ceil(allMovies.length / resultsPerPage);
@@ -90,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Initialize search based on URL query parameter
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get("query");
 

@@ -1,5 +1,5 @@
 document.getElementById("signup-form").addEventListener("submit", async (e) => {
-  e.preventDefault(); // Prevent the default form submission behavior
+  e.preventDefault();
 
   const formData = new FormData(e.target);
   const messageDiv = document.getElementById("response-message");

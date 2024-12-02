@@ -10,12 +10,9 @@
   </head>
   <body>
     <div id="navbar"></div>
-    <div class="container">
-      <h2>Your Watchlist</h2>
-      <ul id="watchlist">
-        <li>Loading watchlist...</li>
-      </ul>
-    </div>
+
+    <div id="watchlist-container"></div>
+
     <script src="js/navbar.js" defer></script>
     <script type="module" src="js/watchlist.js"></script>
   </body>

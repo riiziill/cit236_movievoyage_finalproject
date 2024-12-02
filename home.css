@@ -46,17 +46,17 @@ h2 {
   overflow-x: auto;
   padding-bottom: 20px;
   padding-top: 75px;
-  gap: 20px; /* Increase gap for more space around movie elements */
+  gap: 20px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: maroon #974141;
   width: 100%;
-  padding-left: 30px; /* Add padding to the left */
-  padding-right: 30px; /* Add padding to the right */
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .movie {
-  margin: 20px; /* Increase margin to create more space around movie posters */
+  margin: 20px;
   width: 150px;
   flex-shrink: 0;
   text-align: center;
@@ -74,7 +74,7 @@ h2 {
 .movie img:hover {
   transform: scale(1.5);
   box-shadow: 0 0 15px 5px maroon;
-  z-index: 10; /* Ensure the image stays on top when enlarged */
+  z-index: 10;
 }
 
 .movie h3 {
@@ -117,24 +117,4 @@ h2 {
 
 .movie img {
   border-radius: 8px;
-}
-
-/* Filtered Movies Section */
-#filtered-movies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-  background-color: black;
-}
-
-#filtered-movies .movie {
-  max-width: 200px;
-}
-
-#no-results {
-  color: red;
-  text-align: center;
-  margin: 20px 0;
 }

@@ -2,7 +2,6 @@ import { TMDB_API_KEY } from "./config.js";
 
 const apiKey = TMDB_API_KEY;
 
-// Fetch movie details from TMDb
 async function fetchMovieDetails(id) {
   const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
 
@@ -14,8 +13,8 @@ async function fetchMovieDetails(id) {
       displayMovieDetails(data);
       fetchTrailer(id);
       fetchRecommendedMovies(id);
-      fetchCast(id); // Fetch cast data
-      fetchDirector(id); // Fetch director data
+      fetchCast(id);
+      fetchDirector(id);
     } else {
       console.error("Movie not found:", data.status_message);
       document.getElementById("movie-title").textContent = "Movie not found";
@@ -27,7 +26,6 @@ async function fetchMovieDetails(id) {
   }
 }
 
-// Display movie details on the page
 function displayMovieDetails(movie) {
   document.getElementById("movie-title").textContent = movie.title;
   document.getElementById("movie-poster").src = movie.poster_path
@@ -49,7 +47,6 @@ function displayMovieDetails(movie) {
   }
 }
 
-// Fetch trailer for the movie
 async function fetchTrailer(id) {
   const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`;
 
@@ -62,25 +59,21 @@ async function fetchTrailer(id) {
     if (response.ok && data.results.length > 0) {
       const trailerKey = data.results[0].key;
 
-      // Show the play trailer button if a trailer is available
       trailerButton.style.display = "inline-block";
 
-      // Attach event listener to the trailer button
       trailerButton.addEventListener("click", () => {
         const modal = document.getElementById("trailer-modal");
         const iframe = document.getElementById("trailer-video");
         iframe.src = `https://www.youtube.com/embed/${trailerKey}`;
-        modal.style.display = "flex"; // Show the modal
+        modal.style.display = "flex";
       });
 
-      // Close the modal when clicking the close button
       document.getElementById("close-trailer").addEventListener("click", () => {
         const iframe = document.getElementById("trailer-video");
-        iframe.src = ""; // Stop the video
-        document.getElementById("trailer-modal").style.display = "none"; // Hide modal
+        iframe.src = "";
+        document.getElementById("trailer-modal").style.display = "none";
       });
     } else {
-      // Hide the play trailer button if no trailer is available
       trailerButton.style.display = "none";
       console.log("No trailer available");
     }
@@ -89,8 +82,6 @@ async function fetchTrailer(id) {
   }
 }
 
-// Fetch recommended movies
-// Fetch recommended movies
 async function fetchRecommendedMovies(id) {
   const url = `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${apiKey}&language=en-US`;
 
@@ -98,25 +89,24 @@ async function fetchRecommendedMovies(id) {
     const response = await fetch(url);
     const data = await response.json();
 
-    const recommendedSection = document.getElementById("recommended-section"); // The Recommended section wrapper
+    const recommendedSection = document.getElementById("recommended-section");
 
     if (response.ok && data.results.length > 0) {
       displayRecommendedMovies(data.results);
-      recommendedSection.style.display = "block"; // Show the Recommended section
+      recommendedSection.style.display = "block";
     } else {
-      recommendedSection.style.display = "none"; // Hide the Recommended section if no data
+      recommendedSection.style.display = "none";
       console.log("No recommendations available");
     }
   } catch (error) {
     console.error("Error fetching recommended movies:", error);
-    document.getElementById("recommended-section").style.display = "none"; // Hide if there was an error
+    document.getElementById("recommended-section").style.display = "none";
   }
 }
 
-// Display recommended movies
 function displayRecommendedMovies(movies) {
   const recommendedList = document.getElementById("recommended-list");
-  recommendedList.innerHTML = ""; // Clear the previous list
+  recommendedList.innerHTML = "";
 
   movies.forEach((movie) => {
     const movieItem = document.createElement("div");
@@ -126,16 +116,14 @@ function displayRecommendedMovies(movies) {
       <h3>${movie.title}</h3>
     `;
 
-    // Add click event listener to each movie to redirect to its movie page
     movieItem.addEventListener("click", () => {
-      window.location.href = `movies.php?id=${movie.id}`; // Redirect to the movie details page
+      window.location.href = `movies.php?id=${movie.id}`;
     });
 
     recommendedList.appendChild(movieItem);
   });
 }
 
-// Fetch cast details
 async function fetchCast(id) {
   const url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`;
 
@@ -143,31 +131,29 @@ async function fetchCast(id) {
     const response = await fetch(url);
     const data = await response.json();
 
-    const castSection = document.getElementById("cast-section"); // The Cast section wrapper
+    const castSection = document.getElementById("cast-section");
 
     if (response.ok && data.cast.length > 0) {
       displayCast(data.cast);
-      castSection.style.display = "block"; // Show the Cast section
+      castSection.style.display = "block";
     } else {
-      castSection.style.display = "none"; // Hide the Cast section if no data
+      castSection.style.display = "none";
       console.log("No cast information available");
     }
   } catch (error) {
     console.error("Error fetching cast:", error);
-    document.getElementById("cast-section").style.display = "none"; // Hide if there was an error
+    document.getElementById("cast-section").style.display = "none";
   }
 }
 
-// Display cast in the Cast section
 function displayCast(cast) {
   const castList = document.getElementById("cast-list");
-  castList.innerHTML = ""; // Clear previous list
+  castList.innerHTML = "";
 
   cast.slice(0, 10).forEach((actor) => {
     const castItem = document.createElement("div");
     castItem.className = "cast-item";
 
-    // Check if the actor has a profile image
     const profileImage = actor.profile_path
       ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
       : "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg";
@@ -183,7 +169,6 @@ function displayCast(cast) {
   });
 }
 
-// Fetch director details from TMDb
 async function fetchDirector(id) {
   const url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`;
 
@@ -206,26 +191,22 @@ async function fetchDirector(id) {
   }
 }
 
-// Add to Watchlist
 async function addToWatchlist(movie) {
   if (userId === null) {
     alert("You need to log in to add movies to your watchlist.");
     return;
   }
 
-  // Prepare the form data
   const formData = new FormData();
   formData.append("user_id", userId);
   formData.append("tmdb_id", movie.id);
 
   try {
-    // Send the data to the PHP script asynchronously
     const response = await fetch("add_to_watchlist.php", {
       method: "POST",
       body: formData,
     });
 
-    // Check if the request was successful
     if (response.ok) {
       alert("Movie added to your watchlist!");
     } else {
@@ -237,7 +218,6 @@ async function addToWatchlist(movie) {
   }
 }
 
-// Get the movie ID from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
 
@@ -245,7 +225,6 @@ if (movieId) {
   fetchMovieDetails(movieId);
 }
 
-// Handle return button click
 document.getElementById("returnButton").addEventListener("click", function () {
   window.history.back();
 });

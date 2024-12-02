@@ -1,111 +1,190 @@
-function filterMovies() {
-    const titleFilter = document.getElementById('filter-title').value.toLowerCase();
-    const genreFilter = document.getElementById('filter-genre').value;
-    const yearFilter = document.getElementById('filter-year').value;
+import { TMDB_API_KEY } from "./config.js";
 
-    const allSections = document.querySelectorAll('.section');
-    allSections.forEach(section => {
-        section.style.display = 'none';
-    });
+const apiKey = TMDB_API_KEY;
 
-    document.querySelectorAll('.section').forEach(section => {
-        const genre = section.id.split('-')[0]; // Extract genre from section id, e.g., 'horror', 'comedy'
-        const movieSection = section.querySelector('.movies');
+async function filterMovies() {
+  const titleFilter = document
+    .getElementById("filter-title")
+    .value.toLowerCase();
+  const apiKey = TMDB_API_KEY;
+  const noResults = document.getElementById("no-results");
+  const movieContainer = document.getElementById("filtered-movies");
 
-        let genreMatches = (genreFilter === '' || genre === genreFilter);
-        
-        let movieMatches = false;
-        section.querySelectorAll('.movie').forEach(movie => {
-            const title = movie.getAttribute('data-title');
-            const year = movie.getAttribute('data-year');
-            
-            const matchesTitle = !titleFilter || title.includes(titleFilter);
-            const matchesGenre = !genreFilter || genre === genreFilter;
-            const matchesYear = !yearFilter || year === yearFilter;
+  movieContainer.innerHTML = ""; // Clear previous results
+  noResults.style.display = "none"; // Hide no results initially
 
-            if (matchesTitle && matchesGenre && matchesYear) {
-                movie.style.display = 'block'; // Show the movie if it matches the filter
-                movieMatches = true; // At least one movie in this section matched the filter
-            } else {
-                movie.style.display = 'none'; // Hide the movie if it doesn't match
-            }
-        });
+  if (!titleFilter) {
+    noResults.textContent = "Please enter a title to search.";
+    noResults.style.display = "block";
+    return;
+  }
 
-        // Only display the section if there is a genre match and at least one movie matches
-        if (genreMatches && movieMatches) {
-            section.style.display = 'block'; // Show the genre section
-        } else {
-            section.style.display = 'none'; // Hide the genre section if no movie matches
-        }
-    });
+  let url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
+    titleFilter
+  )}`;
 
-    // Check if any movie is visible
-    const visibleMovies = document.querySelectorAll('.movie[style="display: block;"]');
-    if (visibleMovies.length === 0) {
-        document.getElementById('no-results').style.display = 'block';
-    } else {
-        document.getElementById('no-results').style.display = 'none';
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const data = await response.json();
+
+    if (data.results && data.results.length > 0) {
+      data.results.forEach((movie) => {
+        const movieDiv = document.createElement("div");
+        movieDiv.classList.add("movie");
+
+        const movieTitle = movie.title || "Unknown Title";
+        const moviePoster = movie.poster_path
+          ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+          : "https://via.placeholder.com/200x300?text=No+Image";
+
+        movieDiv.innerHTML = `
+                    <a href="search.html?query=${encodeURIComponent(
+                      movie.title
+                    )}">
+                        <img src="${moviePoster}" alt="${movieTitle}">
+                        <h3>${movieTitle} (${
+          movie.release_date ? movie.release_date.split("-")[0] : "N/A"
+        })</h3>
+                    </a>
+                `;
+
+        movieContainer.appendChild(movieDiv);
+      });
+    } else {
+      noResults.textContent = "No movies found.";
+      noResults.style.display = "block";
+    }
+  } catch (error) {
+    console.error("Error searching movies:", error.message);
+    noResults.textContent = "An error occurred while searching for movies.";
+    noResults.style.display = "block";
+  }
 }
 
-async function fetchMovies(genre, page = 1) {
-    const apiKey = 'f328ad33'; 
-    const url = `https://www.omdbapi.com/?s=${genre}&type=movie&apikey=${apiKey}&page=${page}`;
-    
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data.Response === "True") {
-            displayMovies(genre, data.Search);
-        } else {
-            console.error("Error fetching data:", data.Error);
-        }
-    } catch (error) {
-        console.error("Error fetching movies:", error);
+async function fetchMovies(genreId, genreName, page = 1) {
+  const apiKey = "1853494f7de15c5a8162926c2f958c9b";
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}&page=${page}&language=en-US&sort_by=popularity.desc`;
+
+  displayLoading(genreName);
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const data = await response.json();
+
+    if (data.results) {
+      displayMovies(genreName, data.results);
+    } else {
+      console.error("Error fetching data:", data.status_message);
+    }
+  } catch (error) {
+    console.error(`Error fetching movies for ${genreName}:`, error.message);
+    displayError(genreName); // Show error message if fetching fails
+  }
 }
 
 function displayMovies(genre, movies) {
-    const movieSection = document.getElementById(`${genre}-movies`);
-    movieSection.innerHTML = ''; // Clear existing movies
+  const movieSection = document.getElementById(`${genre}-movies`);
+  movieSection.innerHTML = ""; // Clear existing movies
 
-    if (movies.length === 0) {
-        movieSection.innerHTML = '<p>No movies found for this genre.</p>';
-        return;
-    }
+  if (movies.length === 0) {
+    movieSection.innerHTML = "<p>No movies found for this genre.</p>";
+    return;
+  }
 
-    movies.forEach(movie => {
-        const movieDiv = document.createElement('div');
-        movieDiv.classList.add('movie');
-        movieDiv.setAttribute('data-title', movie.Title.toLowerCase());
-        movieDiv.setAttribute('data-year', movie.Year);
-        movieDiv.setAttribute('data-genre', genre);
-        
-        // Check if movie title or poster is missing
-        const movieTitle = movie.Title || 'Unknown Title';
-        const moviePoster = movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/200x300?text=No+Image';
+  movies.forEach((movie) => {
+    const movieDiv = document.createElement("div");
+    movieDiv.classList.add("movie");
+    movieDiv.setAttribute("data-title", (movie.title || "").toLowerCase());
+    movieDiv.setAttribute(
+      "data-year",
+      movie.release_date ? movie.release_date.split("-")[0] : ""
+    );
+    movieDiv.setAttribute("data-genre", genre);
 
-        movieDiv.innerHTML = `
-            <a href="movies.html?id=${movie.imdbID}">
+    // Check if movie title or poster is missing
+    const movieTitle = movie.title || "Unknown Title";
+    const moviePoster = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : "https://via.placeholder.com/200x300?text=No+Image";
+
+    movieDiv.innerHTML = `
+            <a href="movies.html?id=${movie.id}">
                 <img src="${moviePoster}" alt="${movieTitle}">
-                <h3>${movieTitle} (${movie.Year})</h3>
+                <h3>${movieTitle} (${
+      movie.release_date ? movie.release_date.split("-")[0] : "N/A"
+    })</h3>
             </a>
         `;
-        
-        movieSection.appendChild(movieDiv);
-    });
+
+    movieSection.appendChild(movieDiv);
+  });
 }
 
-function loadInitialMovies() {
-    fetchMovies("horror");
-    fetchMovies("comedy");
-    fetchMovies("action");
-    fetchMovies("romance");
+async function loadInitialMovies() {
+  const genres = [
+    { id: 28, name: "action" },
+    { id: 35, name: "comedy" },
+    { id: 27, name: "horror" },
+    { id: 10749, name: "romance" },
+  ];
+
+  const fetchPromises = genres.map((genre) =>
+    fetchMovies(genre.id, genre.name)
+  );
+  await Promise.all(fetchPromises);
 }
 
-document.getElementById('filter-form').addEventListener('input', function() {
-    filterMovies();
+function displayLoading(genre) {
+  const section = document.getElementById(`${genre}-movies`);
+  section.innerHTML = '<p class="loading">Loading movies...</p>';
+}
+
+function displayError(genre) {
+  const section = document.getElementById(`${genre}-movies`);
+  section.innerHTML =
+    '<p class="error">Failed to load movies. Please try again later.</p>';
+}
+
+document.getElementById("filter-form").addEventListener("input", function () {
+  filterMovies();
 });
 
-document.addEventListener('DOMContentLoaded', loadInitialMovies);
+// Redirect to search page with query when search input is entered
+document
+  .getElementById("filter-title")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const searchQuery = document.getElementById("filter-title").value;
+      window.location.href = `search.html?query=${encodeURIComponent(
+        searchQuery
+      )}`;
+    }
+  });
+
+document
+  .getElementById("filter-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    const searchQuery = document.getElementById("filter-title").value;
+    window.location.href = `search.html?query=${encodeURIComponent(
+      searchQuery
+    )}`;
+  });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterForm = document.getElementById("filter-form");
+  if (filterForm) {
+    filterForm.addEventListener("input", filterMovies);
+  } else {
+    console.error("Filter form element not found in the DOM.");
+  }
+
+  loadInitialMovies();
+});

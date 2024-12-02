@@ -1,59 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Details</title>
-    <link rel="icon" type="image" href="assets/icon.png">
-    <link rel="stylesheet" href="movies.css">
-</head>
-<body>
-    <div class="navbar">
-        <button id="returnButton" class="back-arrow"></button>
-        <h1 class="navbar-title" id="movie-navbar-title">Movie Details</h1>
+    <link rel="icon" type="image" href="assets/icon.png" />
+    <link rel="stylesheet" href="movies.css" />
+    <link rel="stylesheet" href="navbar.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <div class="">
+      <button id="returnButton" class="back-arrow"></button>
+      <!-- Back arrow -->
+      <h1 class="navbar-title" id="movie-navbar-title">Movie Details</h1>
     </div>
     <div class="container">
-        <img id="movie-poster" src="" alt="Movie Poster">
-        <div class="movie-info">
-            <h2 id="movie-title">Loading...</h2>
-            <p><strong>Director:</strong> <span id="movie-director"></span></p>
-            <p><strong>Released:</strong> <span id="movie-released"></span></p>
-            <p><strong>Genre:</strong> <span id="movie-genre"></span></p>
-            <p><strong>Actors:</strong> <span id="movie-actors"></span></p>
-            <p><strong>Review:</strong> <span id="movie-review"></span></p>
-            <br>
-            <button id="addToWatchlistBtn">Add to Watchlist</button>
-            <br>
-            <div class="rating-section">
-                <h3>Rate this Movie:</h3>
-                <div class="stars">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                    <span class="star" data-value="6">&#9733;</span>
-                    <span class="star" data-value="7">&#9733;</span>
-                    <span class="star" data-value="8">&#9733;</span>
-                    <span class="star" data-value="9">&#9733;</span>
-                    <span class="star" data-value="10">&#9733;</span>
-                </div>
+      <img id="movie-poster" src="" alt="Movie Poster" class="movie-poster" />
+      <div class="movie-info">
+        <!-- Trailer Section -->
+        <div class="trailer-section">
+          <button id="play-trailer-btn">Play Trailer</button>
+          <!-- Modal for Trailer -->
+          <div id="trailer-modal" class="modal">
+            <div class="modal-content">
+              <span id="close-trailer" class="close-btn">&times;</span>
+              <iframe
+                id="trailer-video"
+                width="560"
+                height="315"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
             </div>
-            <br>
-            <div class="review-section">
-                <h3>Leave a Review:</h3>
-                <textarea id="user-review" placeholder="Write your review here..."></textarea>
-                <button id="submit-review">Submit</button>
-                <br>
-                <br>
-                <h3>Reviews:</h3>
-                <div id="reviews">
-                    <p id="review1">Loading review 1...</p>
-                    <p id="review2">Loading review 2...</p>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <h2 id="movie-title">Loading...</h2>
+        <p><strong>Director:</strong> <span id="movie-director">N/A</span></p>
+        <p><strong>Released:</strong> <span id="movie-released">N/A</span></p>
+        <p><strong>Genre:</strong> <span id="movie-genre">N/A</span></p>
+        <p><strong>Ratings:</strong> <span id="movie-review">N/A</span>/10</p>
+
+        <br />
+        <button id="addToWatchlistBtn">Add to Watchlist</button>
+
+        <br /><br />
+
+        <!-- Rating Section -->
+        <div class="rating-section">
+          <h3>Rate this Movie:</h3>
+          <div class="stars">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+            <span class="star" data-value="6">&#9733;</span>
+            <span class="star" data-value="7">&#9733;</span>
+            <span class="star" data-value="8">&#9733;</span>
+            <span class="star" data-value="9">&#9733;</span>
+            <span class="star" data-value="10">&#9733;</span>
+          </div>
+        </div>
+
+        <!-- Cast Section -->
+        <div class="cast-section">
+          <h3>Cast</h3>
+          <div id="cast-list" class="movie-list"></div>
+          <!-- New Cast section -->
+        </div>
+
+        <!-- Recommended Movies Section -->
+        <div class="recommended-movies">
+          <h3>Recommended Movies</h3>
+          <div id="recommended-list" class="movie-list"></div>
+        </div>
+
+        <br />
+
+        <!-- Review Section -->
+        <div class="review-section">
+          <h3>Leave a Review:</h3>
+          <textarea
+            id="user-review"
+            placeholder="Write your review here..."
+          ></textarea>
+          <button id="submit-review">Submit</button>
+
+          <br /><br />
+
+          <h3>Reviews:</h3>
+          <div id="reviews">
+            <p id="review1">Loading review 1...</p>
+            <p id="review2">Loading review 2...</p>
+            <!-- More reviews will be added here dynamically -->
+          </div>
+        </div>
+      </div>
     </div>
-    <script src="js/movies.js"></script>
-</body>
+
+    <!-- Link to your JavaScript -->
+    <script src="js/navbar.js"></script>
+    <script type="module" src="js/movies.js"></script>
+  </body>
 </html>

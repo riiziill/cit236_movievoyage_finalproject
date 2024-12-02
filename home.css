@@ -1,162 +1,140 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: black;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: black;
 }
 
-.header {
-    background-color: maroon;
-    color: white;
-    padding: 15px 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
-}
-
-.nav img.nav-img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-}
-
-.nav a {
-    margin: 10px 25px;
-    color: white;
-    text-decoration: none;
-    font-size: large;
-}
-
-.search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}
-
-.search-bar input {
-    padding: 5px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    width: 100%; /* Adjust width as needed */
-    max-width: 300px;
+.loading {
+  text-align: center;
+  color: white;
+  font-size: 18px;
 }
 
 h1 {
-    margin: 0;
+  margin: 0;
 }
 
 .header .profile-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
 }
 
-
 h2 {
-    color: white;
-    padding-left: 20px;
+  color: white;
+  padding-left: 20px;
 }
 
 .section {
-    margin-bottom: 40px;
-    padding-top: 80px; /* Adjust to prevent content from being hidden under the fixed header */
+  margin-bottom: 40px;
+  padding-top: 80px; /* Adjust to prevent content from being hidden under the fixed header */
 }
 
 .section h2 {
-    margin-bottom: 20px;
-    color: white;
+  margin-bottom: 20px;
+  color: white;
 }
 
 .movie-container {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .movies {
-    display: flex;
-    overflow-x: auto;
-    padding-bottom: 20px;
-    padding-top: 75px;
-    gap: 20px; /* Increase gap for more space around movie elements */
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: maroon #974141;
-    width: 100%;
-    padding-left: 30px; /* Add padding to the left */
-    padding-right: 30px; /* Add padding to the right */
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  padding-top: 75px;
+  gap: 20px; /* Increase gap for more space around movie elements */
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: maroon #974141;
+  width: 100%;
+  padding-left: 30px; /* Add padding to the left */
+  padding-right: 30px; /* Add padding to the right */
 }
 
 .movie {
-    margin: 20px; /* Increase margin to create more space around movie posters */
-    width: 150px;
-    flex-shrink: 0;
-    text-align: center;
-    color: white;
+  margin: 20px; /* Increase margin to create more space around movie posters */
+  width: 150px;
+  flex-shrink: 0;
+  text-align: center;
+  color: white;
 }
 
 .movie img {
-    width: 150px;
-    height: 225px;
-    object-fit: cover;
-    border-radius: 5px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie img:hover {
-    transform: scale(1.5);
-    box-shadow: 0 0 15px 5px maroon;
-    z-index: 10; /* Ensure the image stays on top when enlarged */
+  transform: scale(1.5);
+  box-shadow: 0 0 15px 5px maroon;
+  z-index: 10; /* Ensure the image stays on top when enlarged */
 }
 
 .movie h3 {
-    font-size: 1.2em;
-    margin: 10px 0;
+  font-size: 1.2em;
+  margin: 10px 0;
 }
 
 .movies::-webkit-scrollbar {
-    height: 5px;
+  height: 5px;
 }
 
 .movies::-webkit-scrollbar-thumb {
-    background-color: maroon;
-    border-radius: 10px;
+  background-color: maroon;
+  border-radius: 10px;
 }
 
 .movies::-webkit-scrollbar-track {
-    background-color: #974141;
-    border-radius: 10px;
+  background-color: #974141;
+  border-radius: 10px;
 }
 
 .slider-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scrollbar-container {
-    width: 50%;
-    margin: 0 auto;
-    overflow-x: auto;
-    padding-bottom: 10px;
+  width: 50%;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
 .movie a {
-    display: block;
-    text-decoration: none;
-    color: white;
+  display: block;
+  text-decoration: none;
+  color: white;
 }
 
 .movie img {
-    border-radius: 8px;
+  border-radius: 8px;
+}
+
+/* Filtered Movies Section */
+#filtered-movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  background-color: black;
+}
+
+#filtered-movies .movie {
+  max-width: 200px;
+}
+
+#no-results {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
 }
